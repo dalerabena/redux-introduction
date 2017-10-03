@@ -5,11 +5,13 @@ import logo from '../images/logo.svg';
 import './App.css';
 import Todo from '../components/Todo';
 
-import { fetchTodos, todoInit } from '../actions/todosActions';
+import { fetchTodos } from '../actions/todosActions';
+import * as clicks from '../actions/clicksActions';
 
 const mapStoreToProps = (store) => {
   return {
-    todos: store.todos.todos
+    todos: store.todos.todos,
+    clicks: store.clicks
   }
 }
 
@@ -19,17 +21,23 @@ class App extends Component {
     this.props.dispatch(fetchTodos());
   }
 
-  handleChange = () => {
+  incrementClick() {
+    this.props.dispatch(clicks.incrementClick());
+  }
 
+  decrementClick() {
+    this.props.dispatch(clicks.decrementClick());
+  }
+
+  resetClick() {
+    this.props.dispatch(clicks.resetClick());
   }
 
   render() {
 
-    const { error, fetched, fetching, todos, todo, item } = this.props;
+    const { todos, clicks } = this.props;
 
     const mappedTodos = todos.map(item => <p key={item.id}>{item.title}</p>)
-
-    console.log(item);
 
     return (
       <div className="App">
@@ -37,9 +45,17 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Todo List</h1>
         </header>
-        <p className="App-intro">
+        {/* <p className="App-intro">
           To get started, edit <code>src/containers/App.js</code> and save to reload.
+        </p> */}
+
+        <p className="App-intro">
+          Clicks: <strong>{clicks}</strong>
         </p>
+
+        <button onClick={this.incrementClick.bind(this)}>Increment</button>&nbsp;
+        <button onClick={this.decrementClick.bind(this)}>Decrement</button>&nbsp;
+        <button onClick={this.resetClick.bind(this)}>Reset</button>&nbsp;
 
         {/* <form>
           <input type='text' name='todo' value={todo.title} onChange={this.handleChange} />
