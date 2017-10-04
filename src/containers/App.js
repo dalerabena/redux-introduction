@@ -1,72 +1,60 @@
-import React, { Component } from 'react';
+import React from 'react'; 
+import { bindActionCreators }  from 'redux';
 import { connect } from 'react-redux';
+import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment } from 'semantic-ui-react'
 
-import logo from '../images/logo.svg';
-import './App.css';
+import * as ClickActions from '../actions/clickActions';
+import * as TodoActions from '../actions/todoActions';
+
 import Todo from '../components/Todo';
+// import Click from '../components/Click';
 
-import { fetchTodos } from '../actions/todosActions';
-import * as clicks from '../actions/clicksActions';
+const App = ({clicks, clickActions, todos, todoActions}) => (
+  <div>
+    <Menu fixed='top' inverted>
+      <Container>
+        <Menu.Item as='a' header>
+          <Image
+            size='mini'
+            src='https://react.semantic-ui.com/logo.png'
+            style={{ marginRight: '1.5em' }}
+          />
+          React App
+        </Menu.Item>
+        <Menu.Item as='a'>Home</Menu.Item>
+      </Container>
+    </Menu>
 
-const mapStoreToProps = (store) => {
-  return {
-    todos: store.todos.todos,
-    clicks: store.clicks
-  }
-}
+    <Container text style={{ marginTop: '7em' }}>
+      <Header as='h1'>Todos</Header>
+      <Todo todos={todos} actions={todoActions} />
+    </Container>
 
-class App extends Component {  
+    <Segment
+      inverted
+      vertical
+      style={{ margin: '5em 0em 0em', padding: '5em 0em' }}
+    >
+      <Container textAlign='center'>        
+        <List horizontal inverted divided link>
+          <List.Item as='a' href='#'>Site Map</List.Item>
+          <List.Item as='a' href='#'>Contact Us</List.Item>
+          <List.Item as='a' href='#'>Terms and Conditions</List.Item>
+          <List.Item as='a' href='#'>Privacy Policy</List.Item>
+        </List>
+      </Container>
+    </Segment>
+  </div>
+)
 
-  componentWillMount() {
-    this.props.dispatch(fetchTodos());
-  }
+const mapStateToProps = state => ({
+  todos: state.todos,
+  clicks: state.clicks
+})
 
-  incrementClick() {
-    this.props.dispatch(clicks.incrementClick());
-  }
+const mapDispatchToProps = dispatch => ({
+  clickActions: bindActionCreators(ClickActions, dispatch),
+  todoActions: bindActionCreators(TodoActions, dispatch)
+})
 
-  decrementClick() {
-    this.props.dispatch(clicks.decrementClick());
-  }
-
-  resetClick() {
-    this.props.dispatch(clicks.resetClick());
-  }
-
-  render() {
-
-    const { todos, clicks } = this.props;
-
-    const mappedTodos = todos.map(item => <p key={item.id}>{item.title}</p>)
-
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Todo List</h1>
-        </header>
-        {/* <p className="App-intro">
-          To get started, edit <code>src/containers/App.js</code> and save to reload.
-        </p> */}
-
-        <p className="App-intro">
-          Clicks: <strong>{clicks}</strong>
-        </p>
-
-        <button onClick={this.incrementClick.bind(this)}>Increment</button>&nbsp;
-        <button onClick={this.decrementClick.bind(this)}>Decrement</button>&nbsp;
-        <button onClick={this.resetClick.bind(this)}>Reset</button>&nbsp;
-
-        {/* <form>
-          <input type='text' name='todo' value={todo.title} onChange={this.handleChange} />
-          <input type='submit' value='Submit' />
-        </form> */}
-
-        {mappedTodos}
-        
-      </div>
-    );
-  }
-}
-
-export default connect(mapStoreToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

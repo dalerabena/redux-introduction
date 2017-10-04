@@ -1,8 +1,8 @@
 export default function(state=0, action) {
   switch (action.type) {
-    case 'INC': return state + action.payload; break;
-    case 'DEC': return state - action.payload; break;
-    case 'RESET':  return state=0; break; 
+    case 'INC': return state + action.payload;
+    case 'DEC': return state - action.payload;
+    case 'RESET':  return state=0; 
     default: return state;
   }
 }

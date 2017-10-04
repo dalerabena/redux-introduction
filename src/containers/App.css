@@ -1,5 +1,9 @@
-.App {
+/* .App {
   text-align: center;
+} */
+
+.app-container {
+  margin-top: 25px;
 }
 
 .App-logo {
@@ -7,15 +11,21 @@
   height: 80px;
 }
 
+.react-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 10px;
+}
+
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 200px;
   padding: 20px;
   color: white;
+  text-align: center;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .App-intro {
