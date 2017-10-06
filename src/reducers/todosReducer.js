@@ -52,6 +52,23 @@ export default function(state = {
           ]
         }
       }
+      case 'TODO_COMPLETED': {
+        return {
+          ...state,
+          todos: state.todos.map( todo => {
+            if( todo.id !== action.payload.id) {
+              return todo;
+            }
+  
+            return {
+              userId: todo.userId,
+              id: todo.id,
+              title: todo.title,
+              completed: !todo.completed
+            }
+          })
+        }
+      }
       default: return state;
     }
   }

@@ -20,3 +20,14 @@ export function addTodo(id, title) {
     });
   }
 }
+
+export function completedTodo(id) {
+  return function(dispatch) {
+    dispatch({
+      type: 'TODO_COMPLETED',
+      payload: {
+        id
+      }
+    });
+  }
+} 
