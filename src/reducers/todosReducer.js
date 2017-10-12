@@ -52,7 +52,7 @@ export default function(state = {
           ]
         }
       }
-      case 'TODO_COMPLETED': {
+      case 'TODO_TOGGLED': {
         return {
           ...state,
           todos: state.todos.map( todo => {
@@ -67,6 +67,12 @@ export default function(state = {
               completed: !todo.completed
             }
           })
+        }
+      }
+      case 'DELETE_TODO': {
+        return {
+          ...state,
+          todos: state.todos.filter( todo => action.payload.id !== todo.id )
         }
       }
       default: return state;

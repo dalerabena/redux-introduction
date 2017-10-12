@@ -1,9 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import reducer from './reducers';
@@ -12,7 +10,6 @@ import promise from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 
 import App from './components/App';
-// import TodoPage from './containers/TodoPage';
 
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';

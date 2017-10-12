@@ -21,10 +21,21 @@ export function addTodo(id, title) {
   }
 }
 
-export function completedTodo(id) {
+export function toggleTodo(id) {
   return function(dispatch) {
     dispatch({
-      type: 'TODO_COMPLETED',
+      type: 'TODO_TOGGLED',
+      payload: {
+        id
+      }
+    });
+  }
+}
+
+export function deleteTodo(id) {
+  return function(dispatch) {
+    dispatch({
+      type: 'DELETE_TODO',
       payload: {
         id
       }

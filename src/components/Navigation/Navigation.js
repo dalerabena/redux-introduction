@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Container, Image } from 'semantic-ui-react';
 
+import logo from '../../images/logo.svg';
+
 export default class Navigation extends Component {
   render() {
     return (
@@ -10,8 +12,8 @@ export default class Navigation extends Component {
           <Link to="/" className="header item">
             <Image
               size='mini'
-              src='https://react.semantic-ui.com/logo.png'
-              style={{ marginRight: '1.5em' }}
+              src={logo}
+              style={{ marginRight: '1em' }}
             />
             React App
           </Link>

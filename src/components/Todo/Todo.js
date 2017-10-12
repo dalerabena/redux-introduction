@@ -3,6 +3,7 @@ import { bindActionCreators }  from 'redux';
 import { connect } from 'react-redux';
 import { Form, Input, Divider } from 'semantic-ui-react';
 import uuidv4 from 'uuid/v4';
+import firebase from '../../firebase';
 
 import TodosList from './TodoList';
 
@@ -49,8 +50,12 @@ class Todo extends Component {
     }
   }
 
-  handleTodoCompleted = (id) => {
-    this.props.actions.completedTodo(id);
+  handleToggle = (id) => {
+    this.props.actions.toggleTodo(id);
+  }
+
+  handleDelete = (id) => {
+    this.props.actions.deleteTodo(id);
   }
 
   render() {
@@ -67,7 +72,7 @@ class Todo extends Component {
           </Form.Field>
         </Form>
         <Divider horizontal>Todo List</Divider>
-        <TodosList todos={todosList} action={this.handleTodoCompleted} />
+        <TodosList todos={todosList} handleToggle={this.handleToggle} handleDelete={this.handleDelete} />
       </div>
     );
   }
