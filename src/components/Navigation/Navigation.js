@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, Container, Image } from 'semantic-ui-react';
 
 export default class Navigation extends Component {
@@ -7,16 +7,16 @@ export default class Navigation extends Component {
     return (
       <Menu fixed='top' inverted>
         <Container>
-          <Menu.Item as='a' href='/' header>
+          <Link to="/" className="header item">
             <Image
               size='mini'
               src='https://react.semantic-ui.com/logo.png'
               style={{ marginRight: '1.5em' }}
             />
-            Redux
-          </Menu.Item>
-          <Menu.Item as='a' href='/todo'>Todo</Menu.Item>
-          <NavLink to='/todo'>Todo</NavLink>
+            React App
+          </Link>
+          <Link to="/todo" className="item">Todo</Link>
+          <Link to="/click" className="item">Click</Link>  
         </Container>
       </Menu>
     );

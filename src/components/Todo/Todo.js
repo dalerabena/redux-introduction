@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { Form, Input, Divider } from 'semantic-ui-react';
 import uuidv4 from 'uuid/v4';
 
-import * as TodoActions from '../actions/todoActions';
+import TodosList from './TodoList';
 
-import TodosList from '../components/TodoList';
+import * as TodoActions from '../../actions/todoActions';
 
-class TodoPage extends Component {
+class Todo extends Component {
 
   constructor() {
     super();
@@ -18,9 +18,9 @@ class TodoPage extends Component {
     }
   }
 
-  componentWillMount() {
-    this.props.actions.fetchTodos();
-  }
+  // componentWillMount() {
+  //   this.props.actions.fetchTodos();
+  // }
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -81,4 +81,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(TodoActions, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);
