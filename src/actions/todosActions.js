@@ -4,7 +4,7 @@ export function fetchTodos() {
   return function(dispatch) {
     dispatch({
       type: 'GET_TODOS', 
-      payload: axios.get('http://localhost:4000/todos')
+      payload: axios.get('https://jsonplaceholder.typicode.com/todos')
     });
   }
 } 

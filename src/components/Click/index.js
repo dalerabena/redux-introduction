@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-export default class Todo extends Component {
+export default class Click extends Component {
   render() {
     return (
-      <h1>todo component</h1>
+      <h1>click component</h1>
     );
   }
 }
