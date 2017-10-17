@@ -1,9 +1,3 @@
-import React, { Component } from 'react';
+import Todo from './Todo';
 
-export default class Todo extends Component {
-  render() {
-    return (
-      <h1>todo component</h1>
-    );
-  }
-}
+export default Todo;

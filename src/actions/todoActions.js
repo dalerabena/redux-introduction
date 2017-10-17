@@ -9,10 +9,10 @@ export function fetchTodos() {
   }
 } 
 
-export function addTodos(id, title) {
+export function addTodo(id, title) {
   return function(dispatch) {
     dispatch({
-      type: 'ADD_TODOS',
+      type: 'ADD_TODO',
       payload: {
         id,
         title
@@ -21,16 +21,24 @@ export function addTodos(id, title) {
   }
 }
 
-export function todoInit(userId, id, title, completed) {
+export function toggleTodo(id) {
   return function(dispatch) {
     dispatch({
-      type: 'TODO_INIT',
+      type: 'TODO_TOGGLED',
       payload: {
-        userId,
-        id,
-        title,
-        completed
+        id
       }
     });
   }
 }
+
+export function deleteTodo(id) {
+  return function(dispatch) {
+    dispatch({
+      type: 'DELETE_TODO',
+      payload: {
+        id
+      }
+    });
+  }
+} 
