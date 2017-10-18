@@ -9,11 +9,12 @@ import App from './components/App';
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 
-render(
-  <Provider store={store}>    
-    <Router>
-      <Route component={App} />
-    </Router>
-  </Provider>
-  , document.getElementById('root')
-);
+it('renders without crashing', () => {
+  render(
+    <Provider store={store}>    
+      <Router>
+        <Route component={App} />
+      </Router>
+    </Provider>
+    , document.createElement('root'));
+});
