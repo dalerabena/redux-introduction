@@ -7,6 +7,10 @@ import * as ClickActions from '../../actions/clickActions';
 
 class Click extends Component {
 
+  componentDidMount() {
+    this.props.actions.fetchClicks();
+  }
+
   handlePlus = () => {
     this.props.actions.incrementClick();
   }

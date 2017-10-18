@@ -2,7 +2,8 @@ export default function(state = {
     fetching: false,
     fetched: false,
     error: null,
-    todos: []
+    todos: [],
+    data: {}
   }, action) {
     switch (action.type) {
       case 'GET_TODOS_PENDING': {
@@ -27,15 +28,35 @@ export default function(state = {
           error: action.payload
         }
       }
+      // case 'GET_TODOS': {
+      //   const newTodos = Object.keys(action.payload.data).map( key => {
+      //     console.log(key);
+      //   });
+      //   // return {
+      //   //   ...state, 
+      //   //   fetching: false, 
+      //   //   fetched:true, 
+      //   //   todos: newTodos
+      //   // }
+      // }
+      case 'PUSH_TODO': {
+        return {
+          ...state, 
+          todos: [
+            ...state.todos,
+            {
+              userId: action.payload.userId,
+              id: action.payload.key,
+              title: action.payload.title,
+              completed: action.payload.completed
+            }
+          ]
+        }
+      }
       case 'TODO_INIT': {
         return {
           ...state,
-          todo: {
-            userId: action.payload.userId,
-            id: action.payload.id,
-            title: action.payload.title,
-            completed: action.payload.completed
-          }
+          todo: []
         }
       }
       case 'ADD_TODO': {
@@ -44,7 +65,7 @@ export default function(state = {
           todos: [
             ...state.todos,
             {
-              userId: 1,
+              userId: action.payload.userId,
               id: action.payload.id,
               title: action.payload.title,
               completed: false

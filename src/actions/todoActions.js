@@ -1,44 +1,75 @@
-import axios from 'axios';
+import { base } from '../firebaseApp';
+import uuidv4 from 'uuid/v4';
 
-export function fetchTodos() {
-  return function(dispatch) {
-    dispatch({
-      type: 'GET_TODOS', 
-      payload: axios.get('http://localhost:4000/todos')
-    });
+export const fetchTodos = () =>
+  dispatch => {
+    base.fetch('todos', {
+      context: this,
+      asArray: true
+    }).then(data => {
+      data.forEach(element => {
+        dispatch({
+          type: 'PUSH_TODO',
+          payload: element
+        })
+      });
+    }).catch(err => {
+      console.log(err);
+    })
   }
-} 
 
-export function addTodo(id, title) {
-  return function(dispatch) {
-    dispatch({
-      type: 'ADD_TODO',
-      payload: {
-        id,
-        title
-      }
+export const addTodo = (id, title) => 
+  dispatch => {
+    const todo = {
+      userId: uuidv4(),
+      title: title,
+      completed: false
+    };
+    
+    base.push('todos', {
+      data: todo,
+    }).then(response => {
+      const todo = {
+        userId: uuidv4(),
+        id: response.key,
+        title: title,
+        completed: false
+      };
+      dispatch({
+        type: 'ADD_TODO',
+        payload: todo
+      });
+    }).catch(err => {
+      console.log(err);
     });
-  }
-}
+  };
 
-export function toggleTodo(id) {
-  return function(dispatch) {
-    dispatch({
-      type: 'TODO_TOGGLED',
-      payload: {
-        id
-      }
-    });
+export const toggleTodo = (id) =>
+  dispatch => {
+    base.fetch("todos/" + id, {
+      context: this
+    }).then(data => {
+      base.update("todos/" + id, {
+        data: {completed: !data.completed}
+      }).then(() => {
+        console.log('success updating todo');
+      }).catch(err => {
+        console.log(err);
+      });
+    }).catch(err => {
+      console.log(err)
+    })
   }
-}
 
-export function deleteTodo(id) {
-  return function(dispatch) {
-    dispatch({
-      type: 'DELETE_TODO',
-      payload: {
-        id
-      }
-    });
+export const deleteTodo = (id) =>
+  dispatch => {
+    base.remove("todos/" + id).then(() => {
+      console.log("success removing todo");
+      dispatch({
+        type: 'DELETE_TODO',
+        payload: {id}
+      });
+    }).catch(err => {
+      console.log(err)
+    })
   }
-} 
