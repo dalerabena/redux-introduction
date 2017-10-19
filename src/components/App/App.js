@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { bindActionCreators }  from 'redux';
 import * as TodoActions from '../../actions/todoActions';
+import * as ClickActions from '../../actions/clickActions';
 
 import Footer from '../Footer';
 import Navigation from '../Navigation';
@@ -16,6 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.todoActions.fetchTodos();
+    this.props.clickActions.fetchClicks();
   }
 
   render() {
@@ -38,7 +40,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  todoActions: bindActionCreators(TodoActions, dispatch)
+  todoActions: bindActionCreators(TodoActions, dispatch),
+  clickActions: bindActionCreators(ClickActions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
