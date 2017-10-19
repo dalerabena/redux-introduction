@@ -9,7 +9,7 @@ export default class Navigation extends Component {
     return (
       <Menu fixed='top' inverted>
         <Container>
-          <Link to="/" className="header item">
+          <Link to="/react-introduction" className="header item">
             <Image
               size='mini'
               src={logo}

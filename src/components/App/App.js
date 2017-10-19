@@ -25,7 +25,7 @@ class App extends Component {
       <div className='Site'>
         <Navigation />
           <Container text style={{ marginTop: '7em' }} className='Site-content'>
-            <Route exact path="/" component={Hello} />
+            <Route exact path="/react-introduction" component={Hello} />
             <Route path="/todo" component={Todo} />
             <Route path="/click" component={Click} />
           </Container>
